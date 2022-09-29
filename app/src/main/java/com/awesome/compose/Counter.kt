@@ -14,6 +14,11 @@ import androidx.compose.ui.Modifier
 @Composable
 fun Counter() {
     var count by remember { mutableStateOf(0) }
+    val doubleCount by remember {
+        derivedStateOf {
+            count * 2
+        }
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -28,13 +33,16 @@ fun Counter() {
                 )
             }
         },
-    ) { Column(
-            modifier = Modifier.padding(it).fillMaxSize(),
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(text = "You have pushed the button this many times:")
-            Text(text = "$count", style = MaterialTheme.typography.h4)
+            Text(text = "$doubleCount", style = MaterialTheme.typography.h4)
         }
     }
 }
